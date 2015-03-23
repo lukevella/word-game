@@ -41,7 +41,7 @@ angular.module('wordGame',[])
         $scope.gameInProgress = true;
         getNewWord();
 
-        $interval(function(){
+        $scope.timer = $interval(function(){
             if ($scope.timeLeft > 0) {
                 $scope.timeLeft--;
             } else {
@@ -52,6 +52,7 @@ angular.module('wordGame',[])
 
     $scope.gameOver = function(){
         $scope.gameInProgress = false;
+        $interval.cancel($scope.timer);
     }
 
     $scope.$watch('userInput', function(newValue){
