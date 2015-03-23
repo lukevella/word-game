@@ -30,7 +30,6 @@ angular.module('wordGame',[])
     $scope.word = ""; // the target word to guess
     $scope.scrambled = ""; // the target word in scrambled form
     $scope.characterStore = [];
-    $scope.characters = ""; // the characters that are available for the user to guess from
 
     $scope.inputStatus = "default"; // inputStatus = default|correct|incorrect
 
@@ -52,7 +51,7 @@ angular.module('wordGame',[])
 
     $scope.gameOver = function(){
         $scope.gameInProgress = false;
-        $interval.cancel($scope.timer);
+        $interval.cancel($scope.timer); // stop the current interval timer
     }
 
     $scope.$watch('userInput', function(newValue){
@@ -139,10 +138,6 @@ angular.module('wordGame',[])
                 // keyCode is a character between a-z
                 if (keyCode >= 65 && e.which <= 90){
                     $rootScope.$broadcast('keypress:char', e, String.fromCharCode(e.which));
-                }
-
-                if (keyCode == 8) {
-                    $rootScope.$broadcast('keypress:backspace', e, String.fromCharCode(e.which));
                 }
 
             });
